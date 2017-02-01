@@ -1,0 +1,155 @@
+<div data-ng-controller="listNutrionPlansController"> 
+  <div class="row ">
+    <div class="col-xs-12 mb15">
+      <div class="demo-button">
+        <h5>Dias</h5>
+        <div ng-repeat="diaria in plano_nutricao.diaries track by $index">
+          <div ng-if="$index == day" style="float:left;">
+            <button type="button" class="btn btn-default" ng-click="openDay(diaria, $index)">
+              {{weekdays[$index]}}
+            </button>
+          </div>
+          <div ng-if="$index != day"  style="float:left;">
+            <button type="button" class="btn btn-success" ng-click="openDay(diaria, $index)">
+              {{weekdays[$index]}}
+            </button>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+
+
+  <div class="row">
+
+    <div class="col-md-12">
+      <div class="panel panel-primary panel-collapsed" ng-repeat="refeicoes in diar.meals | orderBy: 'hour'">
+        <div class="panel-heading">
+          <div class="pull-left">{{refeicoes.name}} - {{refeicoes.hour}}h</div>
+          <div class="panel-controls">
+            <a href="javascript:;" class="panel-collapse" panel-control-collapse>
+              <i class="panel-icon-chevron"></i>
+            </a>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div class="table-responsive">
+
+            <table class="table mb0">
+              <thead>
+                <tr>
+                  <th>Ingrediente</th>
+                  <th>Quantidade (g)</th>
+                  <th></th>
+
+
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="ingr in refeicoes.ingredients">
+                  <td>{{ingr.fd.name}} 
+                  </td>
+                  <td>{{ingr.quantity}}</td>
+                  <td align="right">
+                    <a ng-click="openIngrediente('', refeicoes.ingredients.indexOf(ingr), 
+                    diar.meals.indexOf(refeicoes), plano_nutricao.diaries.indexOf(diar))">
+                    <i class="fa fa-2x fa-info-circle"></i>
+                  </a>
+                </td>
+
+              </tr>
+
+            </tbody>
+          </table>
+
+          <div class="">
+
+            <!--<button type="button" class="btn btn-success btn-md btn-block">Confirmar todos os ingredientes</button>-->
+
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
+
+</div>
+
+
+</div>
+
+</div>
+</div>
+
+<script type="text/ng-template" id="myModalContent.html">
+  <div class="modal-header">
+    <h3 class="modal-title"> {{food.fd.name}}</h3>
+  </div>
+  <div class="modal-body" style="float:left; width:100%; border-bottom: 1px solid #e5e5e5; margin-bottom:15px;">
+      <ul style="float:left; width:45%;">
+        <li>
+          <b>Calorias</b>: {{food.fd.calories}} KCal
+        </li>
+        <li>
+          <b>Proteína</b>: {{food.fd.protein}} gr
+        </li>
+        <li>
+          <b>Hidratos de Carbono</b>: {{food.fd.carbohydrate}} gr
+          <ul>
+            <li>
+             <b>Açucar</b>: 
+             <span ng-if="food.fd.sugar">{{food.fd.sugar}}</span> 
+             <span ng-if="!food.fd.sugar">0</span> 
+             gr
+           </li>
+           <li>
+             <b>Fibra</b>: {{food.fd.fiber}} gr
+           </li>
+         </ul>
+       </li>
+       <li>
+        <b>Gordura</b>: {{food.fd.fat}} gr
+        <ul>
+         <li>
+          <b>Monoinsaturadas</b>: {{food.fd.monounsaturated_fat}} gr
+        </li>
+        <li>
+          <b>Poliinsaturadas</b>: {{food.fd.polyunsaturated_fat}} gr
+        </li>
+        <li>
+         <b>Saturada</b>: {{food.fd.saturated_fat}} gr
+       </li>
+     </ul>
+   </li>
+   <br>
+ </ul>
+  
+<flot dataset="pieDataset" options="pieOptions" class="chart-sm" height="280" style="margin-top:-5%; float:left; width:55%;">
+</flot>
+
+<table style="float:left;  width:60%;">
+    <th><b>Legenda:</b></th>
+    <tr>
+      <td>1 gr de Gordura = 9 * 1 KCal;
+      </td>
+    </tr>
+    <tr>
+      <td>1 gr de Hidratos de Carbono = 4 * 1 KCal;
+      </td>
+    </tr>
+    <tr>
+      <td>1 gr de Proteína = 4 * 1 KCal.
+      </td>
+    </tr>
+  </table>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-success btn-sm" style="float:right;" ng-click="ok()">Okay</button>
+</div>
+</script>

@@ -1,0 +1,110 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="">
+      <h1 class="lead">Personal Trainers</h1>
+
+
+      <div class="panel" data-ng-controller="listPtsController">
+        <div class="panel-heading border">
+          <ol class="breadcrumb mb0 no-padding">
+            <li>
+              <a href="javascript:;">Home</a>
+            </li>
+            <li>
+              <a href="javascript:;">Personal Trainer</a>
+            </li>
+            <li class="active">Listar</li>
+          </ol>
+        </div>
+        <div class="panel-body">
+         <!--<table id="example2" class="table table-bordered bordered table-striped table-condensed datatable" datatable="ng" ui-jq="dataTable" ui-options="opt">-->
+          <table id="foobar" class="table" cellspacing="0" datatable="ng" dt-options="opt"
+               dt-columns="dtColumns" dt-instance="dtInstance">
+          <thead>
+            <tr class="bold">
+              <th style="width:15%">Nome</th>
+              <th style="width:10%">Pais</th>
+              <th style="width:10%">Idade</th>
+              <th style="width:15%">Especialidades</th>
+              <th style="width:8%">Alunos</th>
+              <th style="width:10%">Classificação</th>
+              <th style="width:10%"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="pt in pts">
+              <td>
+                 {{ pt.name }}
+              </td>
+              <td>
+                <!-- editable status (select-local) -->
+                  {{ pt.country }}
+              </td>
+
+              <td>
+                {{pt.birthday | ageFilter}} Anos
+              </td>
+
+              <td>
+                <!-- editable status (select-local) -->
+                asf
+                  <!--<span ng-repeat="esp in pt.especialidade | limitTo:3"> 
+                      {{esp}}{{$last ? '...' : ', '}}
+                  </span>-->
+              </td>
+
+              <td>
+                  {{ pt.students }}
+              </td>
+
+              <td align="center">
+                <!-- editable status (select-local) -->
+                    <li ng-repeat="i in [] | range:pt.rating" style="padding:0% 2% 0% 0%;" class="fa fa-star text-warning"></li>
+                     <li ng-repeat="i in [] | range:(5-pt.rating)" style="padding:0% 2% 0% 0%;" class="fa fa-star"></li>
+              </td>
+
+              <td style="white-space: nowrap" align="right">
+                <!-- form -->
+
+                <div class="buttons" ng-show="!rowform.$visible">
+                  <div>
+                    <button ng-click="openPT('', {{pts.indexOf(pt)}})" type="button" class="btn btn-success btn-sm btn-icon mr5">
+                      <i class="fa fa-folder-open"></i>
+                      <span>Visualizar</span>
+                    </button>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+
+
+        </div>
+      </div>
+
+
+
+<script type="text/ng-template" id="myModalContent.html">
+  <div class="modal-header">
+    <h3 class="modal-title"> Personal Trainer</h3>
+  </div>
+  <div class="modal-body">
+   <div class="profile-sidebar">
+          <div class="profile-sidebar-item profile-avatar">
+            <img data-ng-src="images/man.png" alt="" class="img-rounded">
+          </div>
+          <div class="profile-sidebar-item profile-info">
+           <span class="h4 bold">{{pt.name}}</span>
+            <p>{{pt.country}}</p>
+            <p>{{pt.birthday | ageFilter}} Anos</p>      
+<!--            <li ng-repeat="i in [] | range:pt.rating" style="padding:0% 1% 0% 0%;" class="fa fa-star text-warning"></li>
+            <li ng-repeat="i in [] | range:(5-pt.rating)" style="padding:0% 1% 0% 0%;" class="fa fa-star"></li>-->
+          </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-success btn-sm" style="float:left;" ng-click="ok()">Requisitar</button>
+    <button class="btn btn-warning btn-sm" ng-click="cancel()">Cancelar</button>
+  </div>
+</script>

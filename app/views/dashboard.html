@@ -1,0 +1,190 @@
+<div data-ng-controller="dashboardCtrl">
+  <div class="row">
+    <div class="col-md-3">
+      <div>
+        <div class="widget bg-white">
+          <div class="widget-icon bg-blue pull-left fa fa-fire">
+          </div>
+          <div class="overflow-hidden">
+            <span class="widget-title">700</span>
+            <span class="widget-subtitle">Calorias Queimadas</span>
+          </div>
+        </div>
+        <div class="widget bg-white">
+          <div class="widget-icon bg-danger pull-left fa fa-heartbeat">
+          </div>
+          <div class="overflow-hidden">
+            <span class="widget-title">86</span>
+            <span class="widget-subtitle">Minutos Exercicio</span>
+          </div>
+        </div>
+        <div class="widget bg-white">
+          <div class="widget-icon bg-success pull-left fa fa-check">
+          </div>
+          <div class="overflow-hidden">
+            <span class="widget-title percent">60</span>
+            <span class="widget-subtitle">Actividades Cumpridas</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <div class="col-sm-5" ui-jq="checkBo">
+    <div class="widget bg-white todo" >
+      <div class="todo-title">
+        Plano de Treino
+         <span class="icon-paper" style="float:right; font-size:26px;"></span>
+      </div>
+
+      <div class="todo-body">
+        <ul class="list-unstyled">
+          <li>
+            <label class="cb-checkbox cb-sm">
+              <input type="checkbox" name="todo" value="1" />Print out fliers
+            </label>
+          </li>
+          <li>
+            <label class="cb-checkbox cb-sm">
+              <input type="checkbox" name="todo" value="2" />Generate loads of ipsum
+            </label>
+          </li>
+          <li>
+            <label class="cb-checkbox cb-sm">
+              <input type="checkbox" name="todo" value="3" />Take out the trash
+            </label>
+          </li>
+          <li>
+            <label class="cb-checkbox cb-sm">
+              <input type="checkbox" name="todo" value="3" />Take out the trash
+            </label>
+          </li>
+          <li>
+            <label class="cb-checkbox cb-sm">
+              <input type="checkbox" name="todo" value="3" />Take out the trash
+            </label>
+          </li>
+        </ul>
+      </div>
+
+      <div class="todo-footer" style="background-color: rgba(0, 0, 0, 0.18);">
+        <strong><span class="count-todos">5</span></strong> Sessões por fazer
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-4" ui-jq="checkBo">
+    <div class="widget bg-white todo">
+      <div class="todo-title">
+        Plano Nutricional
+        <i class="fa fa-cutlery" style="float:right; font-size:25px;"></i>
+      </div>
+
+      <div class="todo-body checkbo">
+        <ul class="list-unstyled">
+          <li>
+            <label class="cb-checkbox cb-sm">
+              <input type="checkbox" name="todo" value="1" />Print out fliers
+            </label>
+          </li>
+          <li>
+            <label class="cb-checkbox cb-sm">
+              <input type="checkbox" name="todo" value="2" />Generate loads of ipsum
+            </label>
+          </li>
+          <li>
+            <label class="cb-checkbox cb-sm">
+              <input type="checkbox" name="todo" value="3" />Take out the trash
+            </label>
+          </li>
+          <li>
+            <label class="cb-checkbox cb-sm">
+              <input type="checkbox" name="todo" value="3" />Take out the trash
+            </label>
+          </li>
+          <li>
+            <label class="cb-checkbox cb-sm">
+              <input type="checkbox" name="todo" value="3" />Take out the trash
+            </label>
+          </li>
+        </ul>
+      </div>
+
+      <div class="todo-footer" style="background-color: rgba(0, 0, 0, 0.18);">
+        <strong><span class="count-todos">5</span> </strong> Refeições por fazer
+      </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-8">
+      <div class="panel">
+        <div class="panel-heading border">
+          Desempenho Mensal\Semanal
+        </div>
+        <div class="panel-body">
+          <div class="canvas-holder">
+            <canvas barchart options="barOptions" data="barData" height="93"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-4" >
+      <div class="panel">
+        <div class="panel-heading border">
+          Evolução
+        </div>
+        <div class="panel-body">
+          <div class="canvas-holder" >
+            <canvas radarchart options="radarOptions" data="radarData" height="200" ></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-md-4">
+      <section class="widget bg-lightblue">
+        <div class="widget-details">
+          <a href="javascript:;" class="pull-left relative">
+            <img data-ng-src="images/avatar.jpg" class="avatar avatar-sm img-circle bordered" alt="">
+            <div class="status bg-primary text-white mt5" data-animation="rubberBand"></div>
+          </a>
+        </div>
+        <div class="widget-details">
+          <span class="h5 bold">José Coiso</span>
+          <small class="block">Lisboa, Portugal</small>
+          <small class="block">Personal Trainer de Yoga</small>
+        </div>
+      </section>
+    </div>
+    <div class="col-md-4">
+      <section class="widget bg-brown text-center">
+        <div class="widget-details">
+          <h2 class="no-margin bold">14&#176;C</h2>
+          <small class="text-uppercase">Braga, Portugal</small>
+        </div>
+        <div class="widget-details">
+          <div class="climacon hail sun fa-4x"></div>
+        </div>
+      </section>
+    </div>
+    <div class="col-md-4">
+      <section class="widget bg-success text-center">
+        <div class="widget-details col-xs-4">
+          <h2 class="no-margin">60</h2>
+          <small class="text-uppercase">Tarefas</small>
+        </div>
+        <div class="widget-details col-xs-4">
+          <h2 class="no-margin">35</h2>
+          <small class="text-uppercase">Completas</small>
+        </div>
+        <div class="widget-details col-xs-4">
+          <h2 class="no-margin">20</h2>
+          <small class="text-uppercase">Falhadas</small>
+        </div>
+      </section>
+    </div>
+  </div>
+
+</div>

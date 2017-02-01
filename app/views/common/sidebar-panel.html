@@ -1,0 +1,153 @@
+<div class="brand">
+  <a href="#/">
+    <!-- logo -->
+    <div class="brand-logo">
+
+      <img data-ng-src="images/4.png" height=65 alt="">
+
+
+    </div>
+  </a>
+  <!-- /logo -->
+
+
+  <!-- toggle small sidebar menu -->
+  <a href="javascript:;" class="toggle-sidebar hidden-xs hamburger-icon v3"
+     data-ng-click="app.layout.isSmallSidebar = !app.layout.isSmallSidebar">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+  </a>
+  <!-- /toggle small sidebar menu -->
+
+</div>
+
+<!-- main navigation -->
+<nav role="navigation" side-navigation>
+  <br/>
+  <br/>
+  <ul class="nav">
+
+    <li ui-sref-active="active">
+      <a href="#/profile">
+        <i class="fa fa-files-o"></i>
+        <span>Perfil</span>
+      </a>
+    </li>
+
+    <li data-ng-class="{open: $state.includes('app.personalTrainers')}">
+      <a href="#/pt">
+        <i class="fa fa-user-plus"></i>
+        <span>Personal Trainer</span>
+      </a>
+      <ul class="sub-menu">
+        <li ui-sref-active="active">
+          <a ui-sref="app.personalTrainers.profile">
+            <span>Ver perfil</span>
+          </a>
+        </li>
+
+        <li ui-sref-active="active">
+          <a ui-sref="app.personalTrainers.list">
+            <span>Visualizar lista</span>
+          </a>
+        </li>
+      </ul>
+    </li>
+
+    <!-- Planos de treino -->
+    <li data-ng-class="{open: $state.includes('app.train_plans')}">
+      <a href="javascript:;">
+        <i class="fa fa-file"></i>
+        <span>Planos de Treino</span>
+      </a>
+
+      <ul class="sub-menu">
+        <li ui-sref-active="active">
+          <a ui-sref="app.train_plans.new">
+            <span>Criar</span>
+          </a>
+        </li>
+
+        <li ui-sref-active="active">
+          <a ui-sref="app.train_plans.list">
+            <span>Listar</span>
+          </a>
+        </li>
+
+
+      </ul>
+
+    </li>
+    <!-- /Planos de treino -->
+
+    <!-- Planos de nutrição -->
+    <li data-ng-class="{open: $state.includes('app.nutrion_plans','app.tables')}">
+      <a href="javascript:;">
+        <i class="fa fa-tint"></i>
+        <span>Planos de nutrição</span>
+      </a>
+
+      <ul class="sub-menu">
+        <li ui-sref-active="active">
+          <a ui-sref="app.nutrion_plans.show">
+            <span>Hoje</span>
+          </a>
+        </li>
+
+        <li ui-sref-active="active">
+          <a ui-sref="app.nutrion_plans.list">
+            <span>Plano Semanal</span>
+          </a>
+        </li>
+
+        <li ui-sref-active="active">
+          <a ui-sref="app.nutrion_plans.hist">
+            <span>Histórico</span>
+          </a>
+        </li>
+
+
+      </ul>
+    </li>
+    <!-- /Planos de nutrição -->
+
+    <li ui-sref-active="active" data-ng-class="{open: $state.includes('app.calendar')}">
+      <a href="#/calendar">
+        <i class="fa fa-calendar"></i>
+        <span>Calendário</span>
+      </a>
+    </li>
+
+    <li ui-sref-active="active">
+      <a href="#/repositories">
+        <i class="fa fa-flask"></i>
+        <span>Repositório</span>
+      </a>
+    </li>
+
+    <!-- exercises -->
+    <li data-ng-class="{open: $state.includes('app.charts')}">
+      <a href="javascript:;">
+        <i class="fa fa-pie-chart"></i>
+        <span>Reports</span>
+      </a>
+    </li>
+    <!-- /exercices -->
+
+
+    <!-- documentation -->
+    <li ui-sref-active="active">
+      <a ui-sref="#">
+        <i class="fa fa-folder"></i>
+        <span>Histórico</span>
+      </a>
+    </li>
+
+
+  </ul>
+
+</nav>
+<!-- /main navigation -->

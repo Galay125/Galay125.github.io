@@ -1,0 +1,253 @@
+<div class="row" data-ng-controller="showRepositoryController">
+  <div class="col-sm-9">
+
+    <div class="panel-body">
+      <div class="">
+
+
+          <span class="lead">{{repository.name}}
+
+          
+            <div class="pull-right btn-group" dropdown>
+
+              <i tooltip-placement="top" tooltip="Histórico" style="cursor: pointer;" class=" icon-paper-stack"></i>
+              <i tooltip-placement="top" tooltip="Opções" style="cursor: pointer;"
+                 class=" icon-align-justify dropdown-toggle"
+                 dropdown-toggle></i>
+
+
+
+            <ul class="dropdown-menu lead" role="menu">
+              <li>
+                <a href="javascript:;">Criar plano de treino</a>
+              </li>
+              <hr/>
+              <li>
+                <a href="#/nutrion_plans/new?repository={{repository.id}}">Criar plano nutricional</a>
+              </li>
+              <hr/>
+
+
+
+              <li>
+                <a href="javascript:;">Selecionar plano de treino ativo</a>
+              </li>
+ <hr/>
+                 <li>
+                <a href="javascript:;">Selecionar plano nutricional ativo</a>
+              </li>
+
+
+
+            </ul>
+
+
+          </div></span>
+
+
+      </div>
+
+      <hr/>
+
+      <span class="bold">Criado em {{repository.createdAt | limitTo: 10 }}</span>
+      <br/>
+      <br/>
+
+
+      <div class="widget bg-info">
+        <div class="widget-bg-icon">
+          <i class="fa fa-tasks"></i>
+        </div>
+        <div class="widget-details">
+          <span class="bold block h4 mt0 mb5">{{activeTrainPlan.name}}</span>
+          <span>Plano de treino ativo</span>
+        </div>
+      </div>
+
+
+      <div class="widget bg-success">
+        <div class="widget-bg-icon">
+          <i class="fa fa-cutlery"></i>
+        </div>
+        <div class="widget-details">
+          <span class="bold block h4 mt0 mb5">{{activeNutritionDiary.name}} <span class="lead"
+                                                                                  ng-show="!hasActiveNutritionDiary"></span></span>
+          <span>Plano de nutrição ativo</span>
+        </div>
+      </div>
+
+
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <div class="bold pull-left">Planos de treino</div>
+          <div class="panel-controls">
+            <a href="javascript:;" class="panel-collapse" panel-control-collapse>
+              <i class="panel-icon-chevron"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="panel-body">
+          <div class="panel">
+
+            <div class="panel-body">
+              <table id="" class="table  " cellspacing="0" width="100%" datatable="ng" dt-options="dtOptions"
+                     dt-columns="dtColumns" dt-instance="dtInstance">
+                <thead>
+                <tr>
+                  <th>Nome do plano</th>
+                  <th>Exercícios</th>
+                  <th>Dias</th>
+                  <th>Observações</th>
+                  <th></th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="trainPlan in trainPlans">
+                  <td>{{trainPlan.name}}</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>{{trainPlan.observations}}</td>
+                  <td>
+                    <div class=" buttons">
+                        <a href="#/plans/{{plan.id}}">
+                             <i tooltip-placement="top" tooltip="Abrir" class="   fa  fa-folder-open-o"></i>
+                        </a>
+                    </div>
+                  </td>
+                 </tr>
+               </tbody>
+             </table>
+            </div>
+          </div>
+         </div>
+
+
+      </div>
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <div class="bold pull-left">Planos de nutrição</div>
+          <div class="panel-controls">
+            <a href="javascript:;" class="panel-collapse" panel-control-collapse>
+              <i class="panel-icon-chevron"></i>
+            </a>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div class="panel">
+
+            <div class="panel-body">
+              <table id="foobar" class="table  " cellspacing="0" width="100%" datatable="ng" dt-options="dtOptions"
+                     dt-columns="dtColumns" dt-instance="dtInstance">
+                <thead>
+                <tr>
+                  <th>Nome do plano</th>
+                  <th>Dias</th>
+                  <th>Observações</th>
+                  <th>Criado</th>
+                  <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="nutritionPlan in nutritionPlans">
+                  <td>{{nutritionPlan.name}}</td>
+                  <td>0</td>
+                  <td>{{nutritionPlan.observations}}</td>
+                  <td>{{nutritionPlan.createdAt | limitTo: 10}}</td>
+                  <td>
+                    <div class=" buttons">
+                         <a href="#/nutrion_plans/{{nutritionPlan.id}}?repository={{repository.id}}">
+                            <i tooltip-placement="top" tooltip="Abrir" class="   fa  fa-folder-open-o"></i>
+                      </a>
+                     </div>
+                  </td>
+                 </tr>
+               </tbody>
+            </table>
+            </div>
+          </div>
+
+        </div>
+
+
+      </div>
+    </div>
+
+  </div>
+  <div class="col-sm-3">
+
+    <div ng-show="hasPt == true">
+      <div class="profile-sidebar">
+        <div class="profile-sidebar-item profile-avatar">
+          <img data-ng-src="images/man.png" alt="" class="img-rounded">
+        </div>
+        <div class="profile-sidebar-item profile-info">
+          <span class="h5 bold">{{pt.name}}</span>
+          <p>Personal Trainer</p>
+          <div class="w150 center-block mt10">
+            <button class="btn btn-danger btn-block">
+              <span>Send a message</span>
+            </button>
+          </div>
+        </div>
+
+        <hr>
+          <div class="profile-sidebar-item profile-bio">
+          <small class="bold text-uppercase">Especialidades</small>
+          <p ng-repeat="i in pt.speciality">{{i}}</p>
+        </div>
+        
+
+        <hr>
+
+        <div class="profile-sidebar-item profile-bio">
+          <small class="bold text-uppercase">Observações</small>
+          <p>{{pt.observations}}</p>
+        </div>
+        <div class="profile-sidebar-item profile-bio">
+          <small class="bold text-uppercase">Descrição</small>
+          <p>{{pt.description}}</p>
+        </div>
+
+        <hr>
+
+        <div class="profile-sidebar-item profile-reccomendations">
+          <small class="bold text-uppercase">Planos já terminados</small>
+          <ul class="user-meta">
+            <li>
+              <a href="javascript:;">All stream</a>
+            </li>
+            <li>
+              <a href="javascript:;">Connected Apps</a>
+            </li>
+            <li>
+              <a href="javascript:;">Photos</a>
+            </li>
+            <li>
+              <a href="javascript:;">Most recent</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+
+    </div>
+    <div ng-show="hasClient == false">
+
+      <div class="error-template">
+        <h1>
+        </h1>
+        <h2 class="lead">
+          Repositório não associado a nenhum cliente!</h2>
+        <div class="error-details">
+
+        </div>
+        <button class="btn-block btn btn-danger">Associar cliente</button>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

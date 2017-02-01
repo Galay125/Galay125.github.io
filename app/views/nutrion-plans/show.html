@@ -1,0 +1,160 @@
+<div data-ng-controller="showNutrionPlansController"> 
+  <div class="row ">
+    <div class="col-xs-12 mb15">
+      <div class="demo-button">
+        <h4>{{weekdays[day]}}</h4>
+      </div>
+
+
+    </div>
+  </div>
+
+
+<div class="row">
+
+  <div class="col-md-12">
+    <div class="panel panel-primary panel-collapsed" ng-repeat="refeicoes in meals | orderBy: 'hour'">
+      <div class="panel-heading">
+        <div class="pull-left">{{refeicoes.name}} - {{refeicoes.hour}}h</div>
+        <div class="panel-controls">
+          <a href="javascript:;" class="panel-collapse" panel-control-collapse>
+            <i class="panel-icon-chevron"></i>
+          </a>
+        </div>
+      </div>
+      <div class="panel-body">
+        <div class="table-responsive">
+
+          <table class="table mb0">
+            <thead>
+            <tr>
+              <th>Ingrediente</th>
+              <th>Quantidade (g)</th>
+              <th><center>Info</center></th>
+              <th></th>
+
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="ingr in refeicoes.ingredients">
+              <td>{{ingr.food.name}} 
+            </td>
+              <td>{{ingr.quantity}}</td>
+              <td align="center">
+                <a ng-click="openIngrediente('', refeicoes.ingredients.indexOf(ingr), 
+                meals.indexOf(refeicoes))">
+                 <i class="fa fa-2x fa-info-circle"></i>
+              </a>
+              </td>
+              <td ng-if="ingr.checks.length > 0" align="right">
+                <div style="display:none;">{{refeicoes.checkado = 1}}</div>
+                <label class="switch switch-sm"   style="text-align:left;"> 
+                  <input type="checkbox" checked=""
+                  ng-click="delCheck(ingr.checks[0].id, ingr.checks[0].dailyCheck);">
+                  <span> <i class="handle"></i> </span> 
+                  </label>
+              </td>
+              <td ng-if="ingr.checks.length == 0" align="right">
+                 <label class="switch switch-sm" style="text-align:left;"> 
+                    <input type="checkbox" 
+                    ng-click="postCheck(ingr.id, refeicoes.id);">
+                    <span> <i class="handle"></i> </span> 
+                  </label>
+              </td>
+
+            </tr>
+
+            </tbody>
+          </table>
+
+          <div class="">
+            <button type="button" class="btn btn-success btn-md btn-block" ng-click="allCheck(refeicoes);">
+              Confirmar todos os ingredientes
+            </button>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+
+   
+    </div>
+
+
+  </div>
+
+
+  </div>
+
+  </div>
+</div>
+
+
+<script type="text/ng-template" id="myModalContent.html">
+  <div class="modal-header">
+    <h3 class="modal-title"> {{ingr.food.name}}</h3>
+  </div>
+  <div class="modal-body" style="float:left; width:100%; border-bottom: 1px solid #e5e5e5; margin-bottom:15px;">
+      <ul style="float:left; width:45%;">
+        <li>
+          <b>Calorias</b>: {{ingr.food.calories}} KCal
+        </li>
+        <li>
+          <b>Proteína</b>: {{ingr.food.protein}} gr
+        </li>
+        <li>
+          <b>Hidratos de Carbono</b>: {{ingr.food.carbohydrate}} gr
+          <ul>
+            <li>
+             <b>Açucar</b>: 
+             <span ng-if="ingr.food.sugar">{{ingr.food.sugar}}</span> 
+             <span ng-if="!ingr.food.sugar">0</span> 
+             gr
+           </li>
+           <li>
+             <b>Fibra</b>: {{ingr.food.fiber}} gr
+           </li>
+         </ul>
+       </li>
+       <li>
+        <b>Gordura</b>: {{ingr.food.fat}} gr
+        <ul>
+         <li>
+          <b>Monoinsaturadas</b>: {{ingr.food.monounsaturated_fat}} gr
+        </li>
+        <li>
+          <b>Poliinsaturadas</b>: {{ingr.food.polyunsaturated_fat}} gr
+        </li>
+        <li>
+         <b>Saturada</b>: {{ingr.food.saturated_fat}} gr
+       </li>
+     </ul>
+   </li>
+   <br>
+ </ul>
+  
+<flot dataset="pieDataset" options="pieOptions" class="chart-sm" height="280" style="margin-top:-5%; float:left; width:55%;">
+</flot>
+
+<table style="float:left;  width:60%;">
+    <th><b>Legenda:</b></th>
+    <tr>
+      <td>1 gr de Gordura = 9 * 1 KCal;
+      </td>
+    </tr>
+    <tr>
+      <td>1 gr de Hidratos de Carbono = 4 * 1 KCal;
+      </td>
+    </tr>
+    <tr>
+      <td>1 gr de Proteína = 4 * 1 KCal.
+      </td>
+    </tr>
+  </table>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-success btn-sm" style="float:right;" ng-click="ok()">Okay</button>
+</div>
+</script>

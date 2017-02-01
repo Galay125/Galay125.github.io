@@ -1,0 +1,23 @@
+[
+  {
+    "from": "Catherine Moreno",
+    "avatar": "images/face1.jpg",
+    "date": 1427207139000,
+    "subject": "Problema com plano de treino",
+    "body": "<p>",
+    "files": [
+      {
+        "type": "pdf",
+        "filename": "October_Sales.pdf",
+        "size": "12Gb"
+      },
+      {
+        "type": "word",
+        "filename": "Resume.doc",
+        "size": "2Kb"
+      }
+    ],
+    "tag": "Personal",
+    "id": 1
+  }
+]

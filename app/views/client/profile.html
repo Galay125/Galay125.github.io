@@ -1,0 +1,228 @@
+<div class="row" data-ng-controller="profileController">
+  <div class="col-sm-8 col-sm-offset-2">
+
+
+    <div class="profile-sidebar">
+      <div class="profile-sidebar-item profile-avatar">
+        <img data-ng-src="images/man.png" alt="" class="img-rounded">
+      </div>
+    </div>
+
+
+    <!-- Profile Image -->
+    <div class="box box-primary">
+      <div class="box-body box-profile">
+
+        <h3 class="profile-username text-center">{{client.appuser.name}}</h3>
+        <p class=" text-center">{{client.appuser.country}}</p>
+        <p class=" text-center">{{client.appuser.birthday | ageFilter}} Anos</p>
+        <a ng-click="editProfile(client,$event)" ng-show="isUserProfile == true" href="#"
+           class="btn btn-danger btn-block">
+            <b>Editar perfil</b>
+         </a>
+        <a ng-show="isUserProfile == false" href="#" class="btn btn-danger btn-block"><b>Enviar mensagem</b></a>
+
+
+        <ul class="list-group list-group-unbordered">
+          <li class="list-group-item">
+            <b>Peso</b> <a class="pull-right">{{client.clientPr.weight}} kg</a>
+          </li>
+          <li class="list-group-item">
+            <b>Altura</b> <a class="pull-right">{{client.clientPr.height}} cm</a>
+          </li>
+          <li class="list-group-item">
+            <b>Gordura Corporal</b> <a class="pull-right">{{client.clientPr.bodyFat}}%</a>
+          </li>
+          
+        </ul>
+
+      </div><!-- /.box-body -->
+    </div><!-- /.box -->
+
+    <!-- About Me Box -->
+    <div class="box box-primary">
+      <div class="box-header with-border">
+        <br/>
+      </div><!-- /.box-header -->
+      <div class="box-body">
+        
+        <strong><i class="margin-r-5"></i>Observações</strong>
+        <br/>
+        <p class=""> {{client.clientPr.observations}}</p>
+        <hr>
+        <strong><i class="margin-r-5"></i>Objetivos</strong>
+        <br/>
+        <p class=""> {{client.clientPr.objectives}}</p>
+
+        <hr>
+        <strong><i ng-show="!boolEditAlergies" ng-click="editAlergies()"
+                   class="fa fa-pencil margin-r-5"></i>
+          <i ng-show="boolEditAlergies == true" ng-click="editAlergies()" class="fa fa-close margin-r-5"></i>
+
+          Alergias</strong>
+        <br/>
+        <p>
+        <form ng-show="boolEditAlergies == true" class="form-inline">
+          <div class="form-group">
+
+            <label class="control-label">Alergia: </label>
+            <input name="alergia" ng-model="alergia" class="form-control"/>
+
+          </div>
+
+          <button class="btn btn-success btn-sm" ng-click="addAlergie(alergia,$event)">Adicionar</button>
+          <button class="btn btn-primary btn-sm" ng-click="addAlergie(alergia,$event)">Guardar</button>
+
+
+        </form>
+
+        <hr/>
+        <button ng-repeat="i in client.clientPr.alergies" type="button"
+                class="btn btn-primary btn-sm btn-icon loading-demo mr5"><i
+          ng-click="removeAlergie(i)" class="fa fa-remove mr5"></i> <span>{{i}}</span></button>
+        </p>
+
+        <hr>
+
+
+    
+
+
+      </div><!-- /.box-body -->
+    </div><!-- /.box -->
+
+
+  </div>
+</div>
+
+
+<script type="text/ng-template" id="modal.html">
+
+  <div class="modal fade">
+    <div class="modal-dialog modal-lg center">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" ng-click="cancel()" data-dismiss="modal"
+                  aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Editar perfil</h4>
+        </div>
+       <div class="modal-body">
+
+
+          <div class="row">
+            <!-- left column -->
+            <div class="col-md-3">
+              <div class="text-center">
+                <img src="//placehold.it/100" class="avatar img-circle" alt="avatar">
+                <h6>Carregar uma foto diferente</h6>
+
+                <input type="file" class="form-control">
+              </div>
+            </div>
+
+            <!-- edit form column -->
+            <div class="col-md-9 personal-info">
+
+
+              <form class="form-horizontal" role="form">
+                <div class="form-group">
+                  <label class="col-lg-3 control-label">Nome:</label>
+                  <div class="col-lg-8">
+                    <input class="form-control" ng-model="new.appuser.name" type="text" value="{{new.appuser.name}}">
+                  </div>
+                </div>
+
+
+                <div class="form-group">
+                  <label class="col-lg-3 control-label">Email:</label>
+                  <div class="col-lg-8">
+                    <input class="form-control" ng-model="new.user.email" type="text" value="{{new.user.email}}">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="col-lg-3 control-label">País:</label>
+                  <div class="col-lg-8">
+                    <input class="form-control" ng-model="new.appuser.country" type="text"
+                           value="{{new.appuser.country}}">
+                  </div>
+                </div>
+
+                <div class="form-group">
+
+                  <label class="col-lg-3 control-label">Data Nascimento:</label>
+                  <div class="col-lg-8">
+                    <input class="form-control" type="date" value="{{new.appuser.birthday}}">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-lg-3 control-label">Username:</label>
+                  <div class="col-lg-8">
+                    <input class="form-control" ng-model="new.user.username" type="text" value="{{new.user.username}}">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-lg-3 control-label">Password:</label>
+                  <div class="col-lg-8">
+                    <input ng-model="new.user.password" class="form-control" type="password" value="">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-lg-3 control-label">Confirm password:</label>
+                  <div class="col-lg-8">
+                    <input ng-model="new.user.password" class="form-control" type="password" value="">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-lg-3 control-label">Peso</label>
+                  <div class="col-lg-8">
+                    <input ng-model="new.clientPr.weight" class="form-control" type="text" value="">
+                  </div>
+                </div>  
+                <div class="form-group">
+                  <label class="col-lg-3 control-label">Altura</label>
+                  <div class="col-lg-8">
+                    <input ng-model="new.clientPr.height" class="form-control" type="text" value="">
+                  </div>
+                </div>  
+                <div class="form-group">
+                  <label class="col-lg-3 control-label">Gordura corporal</label>
+                  <div class="col-lg-8">
+                    <input ng-model="new.clientPr.bodyFat" class="form-control" type="text" value="">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-lg-3 control-label">Objectivos</label>
+                  <div class="col-lg-8">
+                    <input ng-model="new.clientPr.objectives" class="form-control" type="text" value="">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-lg-3 control-label">Observações</label>
+                  <div class="col-lg-8">
+                    <input ng-model="new.clientPr.observations" class="form-control" type="text" value="">
+                  </div>
+                </div>
+
+
+              </form>
+            </div>
+          </div>
+
+
+          <div class="form-group">
+            <label class="col-lg-8 control-label"></label>
+            <div class="col-lg-8">
+              <input type="button" ng-click="close()" class="btn btn-primary" value="Guardar alterações">
+              <span></span>
+              <input ng-click="cancel()" type="reset" class="btn btn-default" value="Cancelar">
+            </div>
+            <br/>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</script>
+

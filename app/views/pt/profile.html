@@ -1,0 +1,300 @@
+<div class="row" data-ng-controller="profileController">
+  <div class="col-sm-12" style="float:left;">
+    <div class="col-sm-4">
+      <div class="profile-sidebar">
+        <div class="profile-sidebar-item profile-avatar">
+          <img data-ng-src="images/man.png" alt="" class="img-rounded">
+        </div>
+        <div class="profile-sidebar-item profile-info">
+          <span class="h4 bold">{{pt.name}}</span>
+          <p>{{pt.country}}</p>
+          <p>{{ pt.birthday | ageFilter}} Anos</p>      
+          
+          <li ng-repeat="i in [] | range:pt.rating" style="padding:0% 1% 0% 0%;" class="fa fa-star text-warning"></li>
+          <li ng-repeat="i in [] | range:(5-pt.rating)" style="padding:0% 1% 0% 0%;" class="fa fa-star"></li>
+          
+          <div class="w150 center-block mt10">
+            <button class="btn btn-danger btn-block">
+              <span>Enviar Mensagem</span>
+            </button>
+          </div>
+          <!--<p style="margin-top:15px;">
+            <!-- Facebook 
+          <a href="#" target="_blank" class="social">
+            <i class="fa fa-facebook"></i>
+          </a>
+          <!-- Twitter 
+          <a href="#" target="_blank" class="social">
+            <i class="fa fa-twitter"></i>
+          </a>
+          <!-- Linkedin 
+          <a href="#" target="_blank" class="social">
+            <i class="fa fa-linkedin"></i>
+          </a>
+          <!-- Youtube 
+          <a href="#" target="_blank" class="social">
+            <i class="fa fa-youtube"></i>
+          </a>                         
+        </p>
+      -->
+    </div>
+
+
+    <hr> 
+
+
+    <ul class="profile-sidebar-item profile-numbers-count">
+      <li>
+        <span class="bold">{{pt.train_plans.length}}</span> Planos de treino
+      </li>
+      <li>
+        <span class="bold">{{pt.nutrion_plans.length}}</span> Planos de nutrição
+      </li>
+      <li>
+        <span class="bold">{{pt.speciality.length}}</span> Especialidades
+      </li>
+    </ul>
+
+    <hr>
+
+
+  </div>
+
+</div>
+
+   <!--<div class="col-sm-8">
+    <div class="col-md-2" ng-repeat="esp in pt.especialidade">
+      <div class="panel panel-danger">
+        <div class="panel-heading no-border">
+          {{esp}}
+        </div>
+      </div>
+    </div>
+  </div>-->
+  <div class="col-sm-8">
+   <div class="panel-body">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <div class="pull-left">Planos de Treino</div>
+        <div class="panel-controls">
+          <a href="javascript:;" class="panel-collapse" panel-control-collapse>
+            <i class="panel-icon-chevron"></i>
+          </a>
+        </div>
+      </div>
+      <div class="panel-body">
+        <div class="media">
+          <div ng-repeat="treino in pt.train_plans | limitTo:3" style="padding:1% 0% 0% 0%;">
+           <a class="pull-left" href="javascript:;">
+            <img class="media-object avatar avatar-sm"
+            data-ng-src="https://static-s.aa-cdn.net/img/ios/895839368/96c227210423e568a44362aa3b941535?v=1" alt="">
+          </a>
+          <div class="comment">
+            <div class="comment-author">
+              <div ng-controller="ModalDemoCtrl">
+                <h4 class="lead">   
+                  <a ng-click="open('lg')"><p>&nbsp;{{treino.name}}</p></a>
+                </h4>
+              </div>
+            </div>
+          </div>
+
+
+          <hr/>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="panel panel-primary" >
+    <div class="panel-heading">
+      <div class="pull-left">Planos de nutrição</div>
+      <div class="panel-controls">
+        <a href="javascript:;" class="panel-collapse" panel-control-collapse>
+          <i class="panel-icon-chevron"></i>
+        </a>
+      </div>
+    </div>
+    <div class="panel-body">
+      <div class="media">
+        <div ng-repeat="nutri in pt.nutrion_plans | limitTo:3" style="padding:1% 0% 0% 0%;">
+          <a class="pull-left" href="javascript:;">
+            <img class="media-object avatar avatar-sm"
+            data-ng-src="http://healthyfamilymealplans.com/wp-content/uploads/2015/11/icon-1.png" alt="">
+          </a>
+          <div class="comment">
+            <div ng-controller="ModalDemoCtrl">
+              <h4 class="lead">   
+                <a ng-click="open('lg')"><p>&nbsp;{{nutri.name}}</p></a>
+              </h4>
+            </div>
+          </div>
+
+
+          <hr/>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!--<div class="panel panel-primary  panel-collapsed">
+    <div class="panel-heading">
+      <div class="pull-left">Comentários</div>
+      <div class="panel-controls">
+        <a href="javascript:;" class="panel-collapse" panel-control-collapse>
+          <i class="panel-icon-chevron"></i>
+        </a>
+      </div>
+    </div>
+    <div class="panel-body" style="padding-bottom: 0px;">
+     <section class="widget bg-white post-comments" style="padding:0px 0px 0px 0px;">
+      <div class="scrollable" style="max-height: 130px;" ui-jq="perfectScrollbar">
+        <div ng-repeat="cm in pt.comments">
+          <div class="media" >
+            <a class="pull-left" href="javascript:;">
+              <img class="media-object avatar avatar-sm" data-ng-src="{{cm.imagem}}" alt="">
+            </a>
+            <div class="comment">
+              <div class="comment-author h6 no-margin">
+                <div class="comment-meta small">{{cm.date}}</div>
+                <a href="javascript:;"><strong>{{cm.cliente}}</strong></a>
+
+                <ul class="text-white list-style-none mb0">
+                  <li ng-repeat="i in [] | range:cm.rate" class="fa fa-star text-warning"></li>
+                </ul>
+              </div>
+
+              <p>
+               {{cm.comment}}
+             </p>
+           </div>
+         </div>
+         <hr>
+       </div>
+     </div>
+   </section>
+ </div>
+</div>
+</div>-->
+</div>
+</div>
+
+
+
+<script type="text/ng-template" id="myModalContent.html">
+  <div data-ng-controller="showTrainPlanExerciseController">
+    <div class="panel panel-primary panel-collapse">
+      <div class="panel-heading">
+        <div class="pull-left bold text-uppercase">Exercícios Dinámicos</div>
+        <div class="panel-controls">
+          <a href="javascript:;" class="panel-collapse" panel-control-collapse>
+            <i class="panel-icon-chevron"></i>
+          </a>
+        </div>
+      </div>
+      <div class="panel-body">
+        <table class="table table-bordered table-hover table-condensed align-middle">
+          <tr class="bold">
+            <td></td>
+            <td>Nome</td>
+            <td>Velocidade</td>
+            <td>T. Descanso</td>
+            <td>Descrição</td>
+            <td>Repetições</td>
+            <td>Status</td>
+            <td></td>    
+          </tr>
+          <tr ng-repeat="exercicio  in exercicios">
+            <td>
+              <!-- editable username (text with validation) -->
+              <span  e-name="file" e-form="rowform"  e-required>
+                <img width="50" height="50" class="" src="{{exercicio.file}}"/>
+              </span>
+            </td>
+            <td>
+              <!-- editable status (select-local) -->
+              <span  e-name="nome" e-form="rowform" e-ng-options="s.value as s.text for s in statuses">
+                {{ exercicio.nome }}
+              </span>
+            </td>
+            <td>
+              <!-- editable username (text with validation) -->
+              <span  e-name="velocidade" e-form="rowform"  e-required>
+                {{ exercicio.velocidade || 'empty' }}
+              </span>
+            </td>
+            <td>
+              <!-- editable username (text with validation) -->
+              <span e-name="tempoDescanso" e-form="rowform"  e-required>
+                {{ exercicio.tempoDescanso || 'empty' }}
+              </span>
+            </td>
+            <td>
+              <!-- editable username (text with validation) -->
+              <span e-name="descricao" e-form="rowform"  e-required>
+                {{ exercicio.descricao || 'empty' }}
+              </span>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="panel panel-primary panel-collapse">
+      <div class="panel-heading">
+        <div class="pull-left bold text-uppercase">Exercícios Estáticos</div>
+        <div class="panel-controls">
+          <a href="javascript:;" class="panel-collapse" panel-control-collapse>
+            <i class="panel-icon-chevron"></i>
+          </a>
+        </div>
+      </div>
+      <div class="panel-body">
+        <table class="table table-bordered table-hover table-condensed align-middle">
+          <tr class="bold">
+            <td></td>
+            <td>Nome</td>
+            <td>Tipo</td>
+            <td>Zona Muscular</td>
+            <td>Descrição</td>
+            <td>Status</td>
+            <td></td>    
+          </tr>
+          <tr ng-repeat="exer  in exerciciosEst">
+            <td>
+              <!-- editable username (text with validation) -->
+              <span  e-name="file" e-form="rowform"  e-required>
+                <img width="50" height="50" class="" src="{{exer.file}}"/>
+              </span>
+            </td>
+            <td>
+              <!-- editable status (select-local) -->
+              <span  e-name="nome" e-form="rowform" e-ng-options="s.value as s.text for s in statuses">
+                {{ exer.nome }}
+              </span>
+            </td>
+            <td>
+              <!-- editable username (text with validation) -->
+              <span  e-name="tipo" e-form="rowform"  e-required>
+                {{ exer.tipo || 'empty' }}
+              </span>
+            </td>
+            <td>
+              <!-- editable username (text with validation) -->
+              <span e-name="zonaMuscular" e-form="rowform"  e-required>
+                {{ exer.zonaMuscular || 'empty' }}
+              </span>
+            </td>
+            <td>
+              <!-- editable username (text with validation) -->
+              <span e-name="descricao" e-form="rowform"  e-required>
+                {{ exer.descricao || 'empty' }}
+              </span>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</script>

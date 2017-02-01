@@ -1,0 +1,145 @@
+<div data-ng-controller="histNutrionPlansController"> 
+  <div class="row ">
+    <div class="col-xs-12 mb15">
+      <div class="demo-button">
+        <h5>Dias</h5>
+        <div ng-repeat="(key, value) in dchecks | orderBy: 'key'">
+          <div ng-if="key != day" style="float:left;">
+            <button type="button" class="btn btn-default" style="float:left;" ng-click="openDay(value, key)">
+              {{key}}
+            </button>
+          </div>
+          <div ng-if="key == day" style="float:left;">
+            <button type="button" class="btn btn-success" style="float:left;" ng-click="openDay(value, key)">
+              {{key}}
+            </button>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+
+
+<div class="row">
+
+  <div class="col-md-12">
+    <div class="panel panel-primary panel-collapsed"  ng-repeat="refeicoes in diar | orderBy: 'hour'">
+      <div class="panel-heading">
+        <div class="pull-left">{{refeicoes.name}} - {{refeicoes.hour}}h</div>
+        <div class="panel-controls">
+          <a href="javascript:;" class="panel-collapse" panel-control-collapse>
+            <i class="panel-icon-chevron"></i>
+          </a>
+        </div>
+      </div>
+      <div class="panel-body">
+        <div class="table-responsive">
+
+          <table class="table mb0">
+            <thead>
+            <tr>
+              <th>Ingrediente</th>
+              <th>Quantidade (g)</th>
+              <th></th>
+
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="ingr in refeicoes.daily">
+              <td>{{ingr.food.name}} 
+            </td>
+              <td>{{ingr.quantity}}</td>
+              <td ng-if="ingr.checks.length > 0" align="right">
+                <i class="fa fa-2x fa-check-circle"></i>
+              </td>
+              <td ng-if="ingr.checks.length == 0" align="right">
+                 <i class="fa fa-2x fa-times-circle"></i>
+              </td>
+
+            </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+   
+    </div>
+
+
+  </div>
+
+
+  </div>
+
+  </div>
+</div>
+
+<script type="text/ng-template" id="myModalContent.html">
+  <div class="modal-header">
+    <h3 class="modal-title"> {{food.fd.name}}</h3>
+  </div>
+  <div class="modal-body">
+    <ul>
+      <li>
+        <b>Calorias</b>: {{food.fd.calories}}
+      </li> 
+      <li>
+        <b>Protaina</b>: {{food.fd.protein}}
+      </li>
+      <li>
+        <b>Hidratos de Carbono</b>: {{food.fd.carbohydrate}}
+        <ul>
+        <li>
+           <b>Açucar</b>: {{food.fd.sugar}}
+        </li>
+         <li>
+           <b>Fibra</b>: {{food.fd.fiber}}
+        </li>
+        </ul>
+      </li>
+      <li>
+        <b>Gordura</b>: {{food.fd.fat}}
+        <ul>
+         <li>
+            <b>Monoinsaturados</b>: {{food.fd.monounsaturated_fat}}
+         </li>
+          <li>
+            <b>Poliinsaturados</b>: {{food.fd.polyunsaturated_fat}}
+          </li>
+           <li>
+             <b>Saturado</b>: {{food.fd.saturated_fat}}
+          </li>
+        </ul>
+      </li>
+      <li>
+        <b>Cálcio</b>: {{food.fd.calcium}}
+      </li>
+      <li>
+        <b>Colestrol</b>: {{food.fd.cholesterol}}
+      </li>
+      <li>
+        <b>Ferro</b>: {{food.fd.iron}}
+      </li>
+      <li>
+        <b>Potássio</b>: {{food.fd.potassium}}
+      </li>
+      <li>
+        <b>Sódio</b>: {{food.fd.sodium}}
+      </li>
+      <li>
+        <b>Vitamina A</b>: {{food.fd.vitamin_a}}
+      </li>
+      <li>
+        <b>Vitamina C</b>: {{food.fd.vitamin_c}}
+      </li>
+    </ul>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-success btn-sm" style="float:right;" ng-click="ok()">Okay</button>
+  </div>
+</script>

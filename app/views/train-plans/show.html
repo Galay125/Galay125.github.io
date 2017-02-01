@@ -1,0 +1,167 @@
+<div data-ng-controller="showTrainPlanExerciseController">
+<div class="panel panel-primary panel-collapse">
+  <div class="panel-heading">
+    <div class="pull-left bold text-uppercase">Exercícios Dinámicos</div>
+    <div class="panel-controls">
+      <a href="javascript:;" class="panel-collapse" panel-control-collapse>
+        <i class="panel-icon-chevron"></i>
+      </a>
+    </div>
+  </div>
+     <div class="panel-body">
+      <table class="table table-bordered table-hover table-condensed align-middle">
+        <tr class="bold">
+          <td></td>
+          <td>Nome</td>
+          <td>Velocidade</td>
+          <td>T. Descanso</td>
+          <td>Descrição</td>
+          <td>Repetições</td>
+          <td>Status</td>
+          <td></td>    
+        </tr>
+        <tr ng-repeat="exercicio  in exercicios">
+          <td>
+            <!-- editable username (text with validation) -->
+            <span  e-name="file" e-form="rowform"  e-required>
+              <img width="50" height="50" class="" src="{{exercicio.file}}"/>
+            </span>
+          </td>
+          <td>
+            <!-- editable status (select-local) -->
+            <span  e-name="nome" e-form="rowform" e-ng-options="s.value as s.text for s in statuses">
+              {{ exercicio.nome }}
+            </span>
+          </td>
+          <td>
+            <!-- editable username (text with validation) -->
+            <span  e-name="velocidade" e-form="rowform"  e-required>
+              {{ exercicio.velocidade || 'empty' }}
+            </span>
+          </td>
+          <td>
+            <!-- editable username (text with validation) -->
+            <span e-name="tempoDescanso" e-form="rowform"  e-required>
+              {{ exercicio.tempoDescanso || 'empty' }}
+            </span>
+          </td>
+          <td>
+            <!-- editable username (text with validation) -->
+            <span e-name="descricao" e-form="rowform"  e-required>
+              {{ exercicio.descricao || 'empty' }}
+            </span>
+          </td>
+          <td>
+            <table class='table table-bordered table-hover table-condensed align-middle mb0 no-margin'>
+              <tr  ng-repeat="repeticao  in exercicio.repeticoes"> 
+                <td>
+                  <span editable-text="repeticao.serie" e-name="serie"  e-required>
+                {{ repeticao.serie || 'Não submetido'}}
+                </span>
+                </td> 
+                <td> 
+                  <span editable-text="repeticao.repeticao" e-name="repeticoes"  e-required>
+                  {{ repeticao.repeticao || 'Não submetido'}} 
+                  </span>
+                </td>
+              </tr>
+            </table>
+          
+          </td>
+          <td>  
+              <input type="checkbox" name="todo" value="1" />        
+          </td>
+          <td style="white-space: nowrap">
+            <!-- form -->
+            <form editable-form name="rowform" onbeforesave="saveUser($data, user.id)" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == user">
+              <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-primary btn-xs">
+                save
+              </button>
+              <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default btn-xs">
+                cancel
+              </button>
+            </form>
+            <div class="buttons" ng-show="!rowform.$visible">
+              <button class="btn btn-primary btn-xs" ng-click="rowform.$show()">save</button>
+              
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+<div class="panel panel-primary panel-collapse">
+  <div class="panel-heading">
+    <div class="pull-left bold text-uppercase">Exercícios Estáticos</div>
+    <div class="panel-controls">
+      <a href="javascript:;" class="panel-collapse" panel-control-collapse>
+        <i class="panel-icon-chevron"></i>
+      </a>
+    </div>
+  </div>
+  <div class="panel-body">
+      <table class="table table-bordered table-hover table-condensed align-middle">
+        <tr class="bold">
+          <td></td>
+          <td>Nome</td>
+          <td>Tipo</td>
+          <td>Zona Muscular</td>
+          <td>Descrição</td>
+          <td>Status</td>
+          <td></td>    
+        </tr>
+        <tr ng-repeat="exer  in exerciciosEst">
+          <td>
+            <!-- editable username (text with validation) -->
+            <span  e-name="file" e-form="rowform"  e-required>
+              <img width="50" height="50" class="" src="{{exer.file}}"/>
+            </span>
+          </td>
+          <td>
+            <!-- editable status (select-local) -->
+            <span  e-name="nome" e-form="rowform" e-ng-options="s.value as s.text for s in statuses">
+              {{ exer.nome }}
+            </span>
+          </td>
+          <td>
+            <!-- editable username (text with validation) -->
+            <span  e-name="tipo" e-form="rowform"  e-required>
+              {{ exer.tipo || 'empty' }}
+            </span>
+          </td>
+          <td>
+            <!-- editable username (text with validation) -->
+            <span e-name="zonaMuscular" e-form="rowform"  e-required>
+              {{ exer.zonaMuscular || 'empty' }}
+            </span>
+          </td>
+          <td>
+            <!-- editable username (text with validation) -->
+            <span e-name="descricao" e-form="rowform"  e-required>
+              {{ exer.descricao || 'empty' }}
+            </span>
+          </td>
+         <td>  
+              <input type="checkbox" name="todo" value="1" />        
+          </td>
+          <td style="white-space: nowrap">
+            <!-- form -->
+            <form editable-form name="rowform" onbeforesave="saveUser($data, user.id)" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == user">
+              <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-primary btn-xs">
+                save
+              </button>
+              <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default btn-xs">
+                cancel
+              </button>
+            </form>
+            <div class="buttons" ng-show="!rowform.$visible">
+              <button class="btn btn-primary btn-xs" ng-click="rowform.$show()">save</button>
+              
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+</div>
+</div>
+
